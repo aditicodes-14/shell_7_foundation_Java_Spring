@@ -4,7 +4,7 @@ name: Azure Web App Container Deployment
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - feature  # Change this to your default branch
 
 jobs:
   build-and-deploy:
@@ -31,8 +31,8 @@ jobs:
         uses: azure/docker-login@v1
         with:
           login-server: https://hub.docker.com/
-          username: ${{ secrets.SECRET_USERNAME }}
-          password: ${{ secrets.SECRET_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       # - name: Build and push Docker image
       #   run: |
@@ -45,8 +45,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-            username: ${{ secrets.SECRET_USERNAME }}
-            password: ${{ secrets.SECRET_PASSWORD }}
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
     
       - name: Push Docker Image
         run: docker push aditigupta14/shell-java-app:0.0.1.Release
@@ -54,8 +54,8 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-            username: ${{ secrets.SECRET_USERNAME }}
-            password: ${{ secrets.SECRET_PASSWORD }}          
+             creds: ${{ secrets.AZURE_CREDENTIALS }}
+             
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
