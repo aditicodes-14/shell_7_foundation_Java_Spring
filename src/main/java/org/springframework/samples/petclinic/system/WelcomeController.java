@@ -27,9 +27,9 @@ class WelcomeController {
 		return "welcome";
 	}
 
-	@GetMapping("/feature")
-	public String welcome() {
-		return "feature done";
-	}
+	// @GetMapping("/feature")
+	// public String welcome() {
+	// 	return "feature done";
+	// }
 
 }
